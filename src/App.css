@@ -16,3 +16,6 @@ input {
   font-family: 'Lato', sans-serif;
 }
 
+.is-hidden {
+  display: none;
+}

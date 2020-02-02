@@ -1,3 +1,4 @@
+@import "../../mixins.scss";
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
@@ -11,7 +12,16 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 100px;
+  padding-top: 56px;
+  @include sm {
+    padding-top: 56px;
+  }
+  @include md {
+    padding-top: 84px;
+  }
+  @include lg {
+    padding-top: 100px;
+  }
 
   & img {
     width: 100%;
@@ -25,12 +35,65 @@
     -moz-transition: filter ease-in-out 0.8s;
     -o-animation: filter ease-in-out 0.8s;
     transition: filter ease-in-out 0.8s;
-    cursor: pointer;
+
   }
   & .img-container {
-    width: 20%;
-    display: inline-block;
+    width: 33.33%;
+    @include sm {
+      width: 33.33%;
+    }
+    @include md {
+      width: 25%;
+    }
+    @include lg {
+      width: 20%;
+    }
+
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+    justify-content: flex-end;
+    cursor: pointer;
+
+    & .movie-details {
+      position: absolute;
+      box-sizing: border-box;
+      padding: 5px 16px 16px;
+      width: inherit;
+      z-index: 600;
+      opacity: 0;
+      background-color: #070D0C;
+      overflow: hidden;
+      transition: opacity ease-in-out 1s;
+      p {
+        text-align: justify;
+        display: none;
+        @include sm {
+          display: none;
+        }
+        @include md {
+          display: none;
+        }
+        @include lg {
+          display: initial;
+        }
+      }
+      h3 {
+        margin-right: 16px;
+      }
+      span {
+        background-color: #8C8C8C;
+        box-sizing: border-box;
+        padding: 5px;
+      }
+    }
+    &:hover .movie-details {
+      opacity: 0.95;
+    }
+
   }
+
+
 
   &:hover img:not(:hover) {
     z-index: 500;
@@ -46,5 +109,19 @@
     -moz-transition: filter ease-in 0.8s;
     -o-animation: filter ease-in 0.8s;
     transition: filter ease-in 0.8s;
+  }
+}
+
+.load-more {
+  height: 84px;
+  width: 100%;
+  border: none;
+  font-size: 32px;
+  font-weight: 300;
+  background-color: #8C8C8C;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  &:hover {
+    cursor: pointer;
   }
 }

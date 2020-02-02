@@ -9,6 +9,8 @@ class App extends React.Component {
 
   state = {
     searchResults: [],
+    resultsPage: 2,
+    totalResultsPage: 1,
     discoveredMovies: [],
     query: ''
   }
@@ -35,20 +37,55 @@ class App extends React.Component {
         crossDomain: true
       });
       const result = await res.json();
-      this.setState({ searchResults: result.results });
+      this.setState({
+        searchResults: result.results,
+        totalResultsPage: result.total_pages,
+        resultsPage: 2 });
     }
     catch (err) {
       console.log(err);
     }
   }
 
+  async searchMoviesPaginated() {
+    const { query, resultsPage } = this.state;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${resultsPage}&api_key=${process.env.REACT_APP_TMDB_API_KEY}`, {
+        crossDomain: true
+      });
+      const result = await res.json();
+      this.setState({
+        searchResults: [
+        ...this.state.searchResults, ...result.results
+      ],
+      resultsPage: resultsPage + 1 });
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+
   onSearchChange = (e) => {
     this.setState({ query: e.target.value }, () => {
-      if (this.state.quert !== '') {
+      if (this.state.query !== '') {
         this.searchMovies();
+      } else {
+        this.setState({ searchResults: [], resultsPage: 2 }, () => {
+          this.getDiscoverMovies();
+        });
       }
-
     });
+  }
+
+  onLoadMore = () => {
+    if (this.state.query !== '' && this.state.resultsPage < this.state.totalResultsPage) {
+      this.searchMoviesPaginated();
+    } else {
+      this.setState({ searchResults: [], resultsPage: 2}, () => {
+        this.getDiscoverMovies();
+      });
+    }
   }
 
   componentDidMount() {
@@ -64,6 +101,7 @@ class App extends React.Component {
           query={query}
           discoveredMovies={discoveredMovies}
           searchResults={searchResults}
+          onLoadMore={this.onLoadMore}
         />
 
       </div>
