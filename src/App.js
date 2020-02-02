@@ -22,7 +22,7 @@ class App extends React.Component {
       });
       const result = await res.json();
       this.setState({
-        discoveredMovies: result.results
+        discoveredMovies: result.results.filter(e => e.poster_path !== null)
       });
     }
     catch (err) {
@@ -38,7 +38,7 @@ class App extends React.Component {
       });
       const result = await res.json();
       this.setState({
-        searchResults: result.results,
+        searchResults: result.results.filter(e => e.poster_path !== null),
         totalResultsPage: result.total_pages,
         resultsPage: 2 });
     }
@@ -56,7 +56,7 @@ class App extends React.Component {
       const result = await res.json();
       this.setState({
         searchResults: [
-        ...this.state.searchResults, ...result.results
+        ...this.state.searchResults, ...result.results.filter(e => e.poster_path !== null)
       ],
       resultsPage: resultsPage + 1 });
     }
