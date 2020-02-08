@@ -1,3 +1,10 @@
+# Search MDB
+
+A simple search app for searching movies made using [The MovieDB API](https://www.themoviedb.org/).
+Front end is written in React and deployed on Heroku.
+
+# Usage
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
