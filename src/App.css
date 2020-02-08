@@ -4,6 +4,14 @@
 
 textarea, select, input, button { outline: none; }
 
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   background-color: #070D0C;
   -webkit-font-smoothing: antialiased;

@@ -65,6 +65,14 @@
       background-color: #070D0C;
       overflow: hidden;
       transition: opacity ease-in-out 1s;
+      a {
+        display: block;
+        margin-top: 5px;
+        color: #F2F2F2;
+        &:visited {
+          color: #F2F2F2;
+        }
+      }
       p {
         text-align: justify;
         display: none;

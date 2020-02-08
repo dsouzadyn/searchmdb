@@ -1,19 +1,6 @@
 import React from 'react';
+import ResultItem from '../result-item-component/result-item.component';
 import './search-result.styles.scss';
-
-const ResultItem = ({posterPath, movieTitle, movieOverview, movieRating}) => (
-  <div className="img-container">
-    <img
-        src={`${process.env.REACT_APP_API_POSTER_BASE_URL}${posterPath}`}
-        onError={(e) => { e.target.src = `https://placekitten.com/320/480`}}
-        alt="poster" />
-    <div className="movie-details">
-      <span>{movieRating}</span>
-      <h3>{movieTitle}</h3>
-      <p>{movieOverview.length > 100 ? movieOverview.substring(0, 97) + '...' : movieOverview}</p>
-    </div>
-  </div>
-);
 
 class SearchResult extends React.Component {
 
@@ -30,6 +17,7 @@ class SearchResult extends React.Component {
             posterPath={movie.poster_path}
             movieTitle={movie.title}
             movieOverview={movie.overview}
+            movieId={movie.id}
             movieRating={movie.vote_average}/>) :
             searchResults &&
             searchResults.map((movie) => <ResultItem
@@ -37,6 +25,7 @@ class SearchResult extends React.Component {
             posterPath={movie.poster_path}
             movieTitle={movie.title}
             movieOverview={movie.overview}
+            movieId={movie.id}
             movieRating={movie.vote_average}/>)
           }
         </div>
